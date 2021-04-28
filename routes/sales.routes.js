@@ -21,8 +21,8 @@ module.exports = function(app) {
   app.get("/api/getSaleByIdParam/:id",[authJwt.verifyToken, authJwt.isAdmin],controller.getSaleByIdParam); 
   // Użytkownik by Name, Surname i City
   //app.get("/api/getSaleByNameSurnameCity",[authJwt.verifyToken, authJwt.isAdmin],controller.getSaleByNameSurnameCity); 
-   // Sprzedaż by Name, Surname i City param
-   //app.get("/api/getSaleByNameSurnameCityParam/:name&:surname&:city",[authJwt.verifyToken, authJwt.isAdmin],controller.getSaleByNameSurnameCityParam); 
+  // Sprzedaż by Name, Surname i City param
+  //app.get("/api/getSaleByNameSurnameCityParam/:name&:surname&:city",[authJwt.verifyToken, authJwt.isAdmin],controller.getSaleByNameSurnameCityParam); 
   // delate z body
   app.delete("/api/deleteSaleById",[authJwt.verifyToken, authJwt.isAdmin],controller.deleteSaleById); 
   // delate z parametry
