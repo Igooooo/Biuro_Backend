@@ -10,7 +10,8 @@ module.exports = function(app) {
     );
     next();
   });
-
+  // Dodanie sprzedaży
+  app.post("/api/addSale",[authJwt.verifyToken, authJwt.isAdmin],controller.addSales);
   // Pojedyńcza sprzedaż
   app.get("/api/getSale",[authJwt.verifyToken, authJwt.isAdmin],controller.getSale);
   // Wszystkie sprzedaże
@@ -19,10 +20,10 @@ module.exports = function(app) {
   app.get("/api/getSaleById",[authJwt.verifyToken, authJwt.isAdmin],controller.getSaleById); 
   // Sprzedaż po id param
   app.get("/api/getSaleByIdParam/:id",[authJwt.verifyToken, authJwt.isAdmin],controller.getSaleByIdParam); 
-  // Użytkownik by Name, Surname i City
-  //app.get("/api/getSaleByNameSurnameCity",[authJwt.verifyToken, authJwt.isAdmin],controller.getSaleByNameSurnameCity); 
-  // Sprzedaż by Name, Surname i City param
-  //app.get("/api/getSaleByNameSurnameCityParam/:name&:surname&:city",[authJwt.verifyToken, authJwt.isAdmin],controller.getSaleByNameSurnameCityParam); 
+  // Sprzedaż po id klienta
+  app.get("/api/getSaleByClientId",[authJwt.verifyToken, authJwt.isAdmin],controller.getSaleByClientId); 
+  // Sprzedaż po id klienta param
+  app.get("/api/getSaleByClientIdParam/:client_id",[authJwt.verifyToken, authJwt.isAdmin],controller.getSaleByClientIdParam); 
   // delate z body
   app.delete("/api/deleteSaleById",[authJwt.verifyToken, authJwt.isAdmin],controller.deleteSaleById); 
   // delate z parametry

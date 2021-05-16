@@ -1,21 +1,29 @@
 // Tworzenie tabeli role
 module.exports = (sequelize, Sequelize) => {
     const Sales = sequelize.define("sales", {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true
-      },
       product_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {         // User belongsTo Company 1:1
+          model: 'products',
+          key: 'id'
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
       client_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {         // User belongsTo Company 1:1
+          model: 'clients',
+          key: 'id'
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
       price: {
         type: Sequelize.FLOAT
       },
       isPay: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       volumen: {
         type: Sequelize.INTEGER

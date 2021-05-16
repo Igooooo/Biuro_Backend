@@ -12,7 +12,7 @@ module.exports = function(app) {
     next();
   });
     // Dodanie produktu
-    app.post("/api/addProduct",[verify.checkDuplicateProduct],controller.addProduct);
+    app.post("/api/addProduct",[verify.checkDuplicateProduct, authJwt.verifyToken, authJwt.isAdmin],controller.addProduct);
     // Pojedyńczy produkt
     app.get("/api/getProduct",[authJwt.verifyToken, authJwt.isAdmin],controller.getProduct);
     // Wszystkie produkty

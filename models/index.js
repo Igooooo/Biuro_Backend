@@ -1,5 +1,6 @@
 const config = require("../config/db.config.js");
 const Sequelize = require("sequelize");
+const SequelizeView = require('sequelize-views-support');
 
 console.log(config.DB);
 // Logowanie do bazy danych
@@ -25,6 +26,7 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+db.SequelizeView = SequelizeView;
 
 // tworzenie tabeli z modeli
 db.user = require("../models/user.model.js")(sequelize, Sequelize);

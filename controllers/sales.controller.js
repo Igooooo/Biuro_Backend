@@ -1,5 +1,23 @@
+const { product } = require("../models");
 const db = require("../models");
 const Sales = db.sales;
+const Product = db.product;
+
+exports.addSales = (req, res) => {
+  Sales.create({
+    product_id: req.body.product_id, 
+    client_id:  req.body.client_id,
+    price:  req.body.price, 
+    isPay: req.body.isPay, 
+    volumen:  req.body.volumen, 
+    other_1:  req.body.other_1,
+    other_2:  req.body.other_2 
+  }).then(sales => {
+      res.send({ message: "Sales was added successfully!" });
+  }).catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
 
 // Pobierz jednego sprzedaż - przekazane do sales.routers.js
 exports.getSale = (req, res, next) => {
@@ -23,7 +41,13 @@ exports.getSale = (req, res, next) => {
 
   // pobierz wszystkich użytkowników - przekazane do sales.routers.js
   exports.getSales = (req, res, next) => {
-    Sales.findAll().then(sales => {
+    Sales.findAll({
+ /*    include: [{
+        model:db.Product,
+        attributes: ['id', 'name'],
+        through: { where: { id: 26} }
+      }], */
+    }).then(sales => {
       if (sales) {
         res.status(200).send({
           data: sales,
@@ -87,13 +111,10 @@ exports.getSale = (req, res, next) => {
     });
   };
 
-  /*
-  // pobierz uzytkownika z body by imie, nazwisko, miasto - przekazane do sales.routers.js
-  exports.getSaleByNameSurnameCity = (req, res, next) => {
+  // pobierz sprzedaż z body by id klienta - przekazane do sales.routers.js
+  exports.getSaleByClientId = (req, res, next) => {
     Sales.findAll({where: {
-      name: req.body.name, 
-      surname: req.body.surname,
-      city: req.body.city,
+      client_id: req.body.client_id
     }}).then(sales => {
       if (sales) {
         res.status(200).send({
@@ -113,15 +134,11 @@ exports.getSale = (req, res, next) => {
     });
   };
  
-  // pobierz uzytkownika z body by imie, nazwisko, miasto - przekazane do sales.routers.js
-  exports.getSalesByNameSurnameCityParam = (req, res, next) => {
-    const name = req.params.name;
-    const surname = req.params.surname;
-    const city = req.params.city;
+  // pobierz sprzedaż z body by id klienta przekazane do sales.routers.js
+  exports.getSaleByClientIdParam = (req, res, next) => {
+    const client_id = req.params.client_id;
     Sales.findAll({where: {
-      name: name, 
-      surname: surname,
-      city: city,
+      client_id: client_id, 
     }}).then(sales => {
       if (sales) {
         res.status(200).send({
@@ -141,7 +158,7 @@ exports.getSale = (req, res, next) => {
       });
     });
   };
- */
+ 
 
   // usuń sprzedaż uzytkownika z body by ID - przekazane do sales.routers.js
   exports.deleteSaleById = (req, res, next) => {
