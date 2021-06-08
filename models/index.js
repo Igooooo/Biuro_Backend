@@ -49,6 +49,24 @@ db.user.belongsToMany(db.role, {
   as: "roles"
 });
 
+/*
+db.client.belongsToMany(db.product, {
+  through: "sales",
+  foreignKey: "client_id",
+  otherKey: "product_id",
+  as: "sale"
+});
+db.product.belongsToMany(db.client, {
+  through: "sales",
+  foreignKey: "product_id",
+  otherKey: "client_id",
+  as: "sale"
+});
+*/
+db.sales.belongsTo(db.product);
+db.sales.belongsTo(db.client);
+db.client.hasMany(db.sales)
+db.product.hasMany(db.sales)
 
 db.ROLES = ["user", "admin", "moderator"];
 

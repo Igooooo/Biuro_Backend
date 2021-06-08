@@ -16,6 +16,8 @@ module.exports = function(app) {
   app.get("/api/getSale",[authJwt.verifyToken, authJwt.isAdmin],controller.getSale);
   // Wszystkie sprzedaże
   app.get("/api/getSales",[authJwt.verifyToken, authJwt.isAdmin],controller.getSales);
+  // Wszystkie sprzedaże z Klientami i Produktami
+  app.get("/api/getSalesWithProductAndClient",[authJwt.verifyToken, authJwt.isAdmin],controller.getSalesWithProductAndClient);
   // Sprzedaż po id Body
   app.get("/api/getSaleById",[authJwt.verifyToken, authJwt.isAdmin],controller.getSaleById); 
   // Sprzedaż po id param

@@ -1,14 +1,14 @@
 // Tworzenie tabeli role
 module.exports = (sequelize, Sequelize) => {
     const Sales = sequelize.define("sales", {
-      product_id: {
+      /*product_id: {
         type: Sequelize.INTEGER,
         references: {         // User belongsTo Company 1:1
           model: 'products',
           key: 'id'
         },
         onDelete: 'cascade',
-        onUpdate: 'cascade'
+        onUpdate: 'cascade' 
       },
       client_id: {
         type: Sequelize.INTEGER,
@@ -17,8 +17,8 @@ module.exports = (sequelize, Sequelize) => {
           key: 'id'
         },
         onDelete: 'cascade',
-        onUpdate: 'cascade'
-      },
+        onUpdate: 'cascade' 
+      }, */
       price: {
         type: Sequelize.FLOAT
       },
@@ -34,6 +34,21 @@ module.exports = (sequelize, Sequelize) => {
       other_2: {
         type: Sequelize.STRING
       }
-    });
+    })
+    /*
+   Sales.associate = models => {
+    models.Sales.belongsTo(models.Client, {
+      foreignKey: {
+        allowNull: false
+      }
+    }) 
+  }
+  Sales.associate = models => {
+    models.Sales.belongsTo(models.Procuct, {
+      foreignKey: {
+        allowNull: false
+      }
+    })
+  } */
     return Sales;
   };
