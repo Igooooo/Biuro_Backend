@@ -13,7 +13,7 @@ module.exports = function(app) {
   });
 
   // Dodanie klienta
-  app.post("/api/addClient",[verify.checkDuplicateClient],controller.addClient);
+  app.post("/api/addClient",[verify.checkDuplicateClient, authJwt.verifyToken, authJwt.isAdmin],controller.addClient);
   // Pojedyńczy Klient
   app.get("/api/getClient",[authJwt.verifyToken, authJwt.isAdmin],controller.getClient);
   // Wszyscy klienci
